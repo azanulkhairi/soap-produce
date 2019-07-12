@@ -3,6 +3,7 @@ package com.company.jwt.config;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.ws.config.annotation.EnableWs;
@@ -14,6 +15,7 @@ import org.springframework.xml.xsd.XsdSchema;
 
 @EnableWs
 @Configuration
+@ComponentScan
 public class WebServiceConfig extends WsConfigurerAdapter{
 	
 	@Bean
@@ -31,7 +33,7 @@ public class WebServiceConfig extends WsConfigurerAdapter{
 		DefaultWsdl11Definition defaultWsdl11Definition = new DefaultWsdl11Definition();
 		defaultWsdl11Definition.setPortTypeName("CountriesPort");
 		defaultWsdl11Definition.setLocationUri("/ws");
-		defaultWsdl11Definition.setTargetNamespace("http://www.baeldung.com/springsoap/gen");
+		defaultWsdl11Definition.setTargetNamespace("http://spring.io/guides/gs-producing-web-service");
 		defaultWsdl11Definition.setSchema(countSchema);
 		return defaultWsdl11Definition;
 		

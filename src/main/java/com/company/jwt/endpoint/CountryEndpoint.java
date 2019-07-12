@@ -1,8 +1,10 @@
-package com.company.jwt;
+package com.company.jwt.endpoint;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
+import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
+import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import com.company.jwt.repository.CountryRepository;
 import com.company.jwt.webservice.GetCountryRequest;
@@ -17,11 +19,16 @@ import com.company.jwt.webservice.GetCountryResponse;
 @Endpoint
 public class CountryEndpoint {
 	
-	private static final String NAMESPACE_URI ="http://www.baeldung.com/springsoap/gen";
+	private static final String NAMESPACE_URI ="http://spring.io/guides/gs-producing-web-service";
 	
-	@Autowired
 	private CountryRepository countryRepository;
-	
+	 
+    @Autowired
+    public CountryEndpoint(CountryRepository countryRepository) {
+        this.countryRepository = countryRepository;
+    }
+	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getCountryRequest")
+    @ResponsePayload
 	public GetCountryResponse getCountryResponse(@RequestPayload GetCountryRequest request) {
 		
 		GetCountryResponse response= new GetCountryResponse();
